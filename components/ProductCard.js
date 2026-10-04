@@ -1,0 +1,6 @@
+ "use client";
+import Link from "next/link";
+export default function ProductCard({p}){
+ function add(e){e.preventDefault();e.stopPropagation();const a=JSON.parse(localStorage.getItem("hoco_cart")||"[]");if(!a.includes(p.id))a.push(p.id);localStorage.setItem("hoco_cart",JSON.stringify(a));alert("Added to cart");}
+ return <Link href={`/product/${p.id}`} className="card"><div className="photo"><img src={p.image} alt={p.name}/><span className="badge">{p.discount}% OFF</span><button className="heart" onClick={e=>{e.preventDefault();e.stopPropagation()}}>♡</button></div><div className="card-body"><div className="brand">{p.brand} • {p.category}</div><div className="name">{p.name}</div><div className="price">₹{p.price.toLocaleString()} <span className="old">₹{p.oldPrice.toLocaleString()}</span></div><div className="rating">★ {p.rating} • {p.video ? "Video available" : "Fast delivery"}</div><button onClick={add} style={{marginTop:10,width:"100%",border:0,borderRadius:10,padding:10,background:"#111",color:"#fff",fontWeight:800}}>Add to cart</button></div></Link>
+}
